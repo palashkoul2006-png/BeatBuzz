@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verify Email (OTP)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="Beatbuzz_icon.png">
+</head>
+<body class="page-enter" data-theme="dark">
+  <div class="auth-card">
+    <div class="brand mb-3 d-flex align-items-center">
+      <img src="Beatbuzz_icon.png" alt="Beatbuzz" class="brand-icon" style="width:32px;height:32px;margin-right:8px;"/>
+      <div class="brand-name">Beatbuzz</div>
+    </div>
+    <h1 class="title">Verify your email</h1>
+    <p class="subtitle">Enter the OTP sent to your email. Valid for 5 minutes.</p>
+    <form id="verifyForm">
+      <label class="form-label" for="v-username">Username (optional)</label>
+      <div class="input-wrap">
+        <i class="bi bi-person"></i>
+        <input class="input" id="v-username" type="text" name="username" placeholder="Your username" />
+      </div>
+
+      <label class="form-label" for="v-email">Email address (optional)</label>
+      <div class="input-wrap">
+        <i class="bi bi-envelope"></i>
+        <input class="input" id="v-email" type="email" name="email" placeholder="Your registered email" />
+      </div>
+
+      <label class="form-label" for="v-otp">OTP</label>
+      <div class="input-wrap">
+        <i class="bi bi-shield-lock"></i>
+        <input class="input" id="v-otp" type="text" name="otp" placeholder="6-digit OTP" pattern="\\d{6}" maxlength="6" required />
+      </div>
+
+      <div class="actions mt-3">
+        <button class="btn btn-primary" type="submit">Verify</button>
+        <a class="btn btn-secondary" href="register.html">Back to Register</a>
+        <a class="btn btn-link" href="index.html" style="margin-left:8px">Login</a>
+      </div>
+    </form>
+    <p id="status" class="note"></p>
+  </div>
+  <script>
+    // If username provided via query, prefill it
+    (function(){
+      const params = new URLSearchParams(window.location.search);
+      const u = params.get('username');
+      if (u) document.getElementById('v-username').value = u;
+    })();
+    document.getElementById('verifyForm').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const username = document.getElementById('v-username').value.trim();
+      const email = document.getElementById('v-email').value.trim();
+      const otp = document.getElementById('v-otp').value.trim();
+      const status = document.getElementById('status');
+      if (!username && !email) {
+        status.textContent = 'Provide either username or email along with OTP.';
+        return;
+      }
+      status.textContent = 'Verifying OTP...';
+      try {
+        const resp = await fetch('/api/verify_otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, otp })
+        });
+        const data = await resp.json().catch(() => null);
+        if (resp.ok && data && data.ok) {
+          status.textContent = '✅ Email verified! Redirecting to setup...';
+          const to = (data.redirect || '/setup/setup.html');
+          setTimeout(() => window.location.href = to, 800);
+        } else {
+          status.textContent = (data && data.message) ? data.message : '❌ Verification failed. Check OTP and try again.';
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+  <script src="theme.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,126 @@
+/* Chat grid inside the center-feed, using global theme from explore.css */
+.chat-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 16px;
+  height: calc(100vh - 120px); /* fill available viewport, leaving room for the title */
+  min-height: 0; /* allow children to shrink below their content size */
+}
+
+.conversations {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 14px;
+  color: var(--text);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* contain the scrollable inner lists */
+  min-height: 0;
+}
+.conv-header {
+  font-weight: 600;
+  margin: 6px 0 10px;
+  color: var(--primary);
+}
+.conv-search {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--background);
+  color: var(--text);
+  margin-bottom: 10px;
+  outline: none;
+}
+.conv-search:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(228,25,85,0.12);
+}
+.conv-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Wrap both conv-list sections in a common scrollable container */
+.conv-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+.conv-item:hover { background: var(--profile-bg); }
+.conv-item.active { background: linear-gradient(135deg, rgba(228,25,85,0.10), rgba(194,23,73,0.10)); border: 1px solid rgba(228,25,85,0.25); }
+.conv-pic {
+  width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+}
+.conv-main { flex: 1; }
+.conv-name { font-weight: 600; color: var(--text); }
+.conv-last { font-size: 12px; color: var(--muted); }
+.conv-time { font-size: 11px; color: var(--muted); opacity: 0.8; }
+.conv-unread {
+  background: var(--primary); color: white; border-radius: 12px;
+  padding: 2px 8px; font-size: 12px;
+}
+
+.chat-panel {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 14px;
+  color: var(--text);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* critical: allow flex child to shrink */
+  overflow: hidden;
+}
+.chat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.peer-pic { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.peer-info, .me-info { display: flex; flex-direction: column; gap: 2px; justify-content: center; }
+.peer-username, .me-username { font-size: 0.9rem; color: var(--primary); font-weight: 600; }
+.peer-fullname, .me-fullname { font-size: 1rem; font-weight: 700; color: var(--text); }
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 0;
+  min-height: 0; /* must be set so flex child can actually scroll */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+.bubble {
+  max-width: 70%; padding: 10px 12px; border-radius: 14px; margin: 8px;
+  word-wrap: break-word; line-height: 1.4;
+}
+
+.bubble.me { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; margin-left: auto; box-shadow: 0 6px 20px rgba(228,25,85,0.25); }
+.bubble.them { background: var(--profile-bg); color: var(--text); margin-right: auto; border: 1px solid var(--border-color); }
+.timestamp { font-size: 11px; color: var(--muted); margin: 0 10px; opacity: 0.8; }
+.send-form { display: flex; gap: 10px; padding-top: 10px; }
+.send-form input { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--background); color: var(--text); }
+.send-form input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(228,25,85,0.12); outline: none; }
+.send-form button { padding: 12px 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; cursor: pointer; box-shadow: 0 8px 20px rgba(228,25,85,0.25); }
+
+.me-card { display: flex; align-items: center; gap: 12px; }
+.me-pic { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+
+/* Empty state */
+.empty-state { color: var(--muted); text-align: center; padding: 16px; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .chat-grid {
+    grid-template-columns: 1fr;
+  }
+  .conversations { order: 1; }
+  .chat-panel { order: 2; }
+}

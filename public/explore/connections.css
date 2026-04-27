@@ -1,0 +1,49 @@
+.connections-container {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.connections-section {
+  margin-bottom: 2rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.user-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.user-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(228,25,85,0.15);
+}
+
+.user-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+}
+
+.user-name {
+  font-weight: 700;
+  color: var(--primary);
+}

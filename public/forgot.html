@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Forgot Password</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="Beatbuzz_icon.png">
+  </head>
+<body class="page-enter" data-theme="dark">
+  <div class="auth-card">
+    <div class="brand mb-3 d-flex align-items-center">
+      <img src="Beatbuzz_icon.png" alt="Beatbuzz" class="brand-icon" style="width:32px;height:32px;margin-right:8px;"/>
+      <div class="brand-name">Beatbuzz</div>
+    </div>
+    <h1 class="title">Forgot your password?</h1>
+    <p class="subtitle">Enter your registered email and we'll send you a reset link.</p>
+    <form id="forgotForm">
+      <label class="form-label" for="email">Email address</label>
+      <div class="input-wrap">
+        <i class="bi bi-envelope"></i>
+        <input class="input" id="email" type="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div class="actions mt-3">
+        <button class="btn btn-primary" type="submit">Send reset link</button>
+        <a class="btn btn-secondary" href="index.html">Back to login</a>
+      </div>
+    </form>
+    <p id="status" class="note"></p>
+  </div>
+  <script>
+    document.getElementById('forgotForm').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const status = document.getElementById('status');
+      status.textContent = 'Sending reset link...';
+      try {
+        const resp = await fetch('/api/forgot_password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        if (resp.ok) {
+          status.textContent = 'If the email exists, a reset link has been sent.';
+        } else {
+          const txt = await resp.text();
+          status.textContent = txt || 'Failed to send reset link.';
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+  <script src="theme.js"></script>
+</body>
+</html>

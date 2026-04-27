@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap for consistent base styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="Beatbuzz_icon.png">
+</head>
+<body class="page-enter" data-theme="dark">
+  <div class="card">
+    <!-- LEFT: hero / illustration -->
+    <div class="left">
+      <div class="hero">
+        <img class="logo hero-logo" src="Beatbuzz_logo.png" alt="Beatbuzz" />
+        <h2 class="hero-heading">Over 50 different social media channels</h2>
+      </div>
+    </div>
+
+    <!-- RIGHT: brand + form -->
+    <div class="right">
+      <div class="brand">
+        <img src="Beatbuzz_icon.png" alt="Beatbuzz" class="brand-icon"/>
+        <div class="brand-name">Beatbuzz</div>
+      </div>
+      <h1 class="title">Sign in now</h1>
+      <form class="form" action="/login" method="POST">
+        <label class="form-label" for="username">Username</label>
+        <div class="input-wrap">
+          <i class="bi bi-person"></i>
+          <input class="input" id="username" type="text" name="username" placeholder="Enter username" required />
+        </div>
+
+        <label class="form-label" for="password">Password</label>
+        <div class="input-wrap">
+          <i class="bi bi-lock"></i>
+          <input class="input" id="password" type="password" name="password" placeholder="Enter password" required />
+          <button type="button" class="eye-toggle" id="togglePassword" tabindex="-1" aria-label="Toggle password visibility">
+            <i class="bi bi-eye-slash" id="eyeIcon"></i>
+          </button>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Sign in</button>
+          <a class="btn btn-secondary" href="register.html">Register</a>
+          <a class="btn btn-link" href="forgot.html">Forgot password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Autologin support via query params for testing
+    (function () {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('autologin') === '1') {
+          const username = params.get('username');
+          const password = params.get('password');
+          if (username && password) {
+            const form = document.querySelector('form[action="/login"]');
+            const u = form.querySelector('input[name="username"]');
+            const p = form.querySelector('input[name="password"]');
+            u.value = username;
+            p.value = password;
+            form.submit();
+          }
+        }
+      } catch (e) {
+        console.warn('Autologin init failed:', e);
+      }
+    })();
+    // Toggle password visibility
+    (function(){
+      const pw      = document.getElementById('password');
+      const togBtn  = document.getElementById('togglePassword');
+      const eyeIcon = document.getElementById('eyeIcon');
+      if (!pw || !togBtn) return;
+      togBtn.addEventListener('click', function(){
+        const isHidden = pw.type === 'password';
+        pw.type = isHidden ? 'text' : 'password';
+        if (eyeIcon) {
+          eyeIcon.className = isHidden ? 'bi bi-eye' : 'bi bi-eye-slash';
+        }
+      });
+    })();
+  </script>
+  <script src="theme.js"></script>
+</body>
+</html>

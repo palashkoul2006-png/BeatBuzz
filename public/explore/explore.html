@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Beatbuzz | Explore</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="explore.css"/>
+  <link rel="icon" type="image/png" href="Beatbuzz_icon.png">
+</head>
+<body>
+  <div class="main-layout">
+    <nav class="sidebar">
+      <a href="explore.html" class="active"><i class="bi bi-compass"></i><span class="label">Explore</span></a>
+      <a href="search.html"><i class="bi bi-search"></i><span class="label">Search</span></a>
+      <a href="notification.html"><i class="bi bi-bell"></i><span class="label">Notifications</span></a>
+      <a href="posts.html"><i class="bi bi-images"></i><span class="label">Posts</span></a>
+      <a href="chat.html"><i class="bi bi-chat-dots"></i><span class="label">Chat</span></a>
+      <a href="profile.html"><i class="bi bi-person"></i><span class="label">Profile</span></a>
+      <a href="http://localhost:5000/logout"><i class="bi bi-box-arrow-right"></i><span class="label">Logout</span></a>
+    </nav>
+
+    <main class="center-feed">
+      <div class="stories-bar">
+        <div class="story"><div class="story-pic">BB</div><div class="story-name">You</div></div>
+        <div class="story"><div class="story-pic"></div><div class="story-name">User</div></div>
+        <div class="story"><div class="story-pic"></div><div class="story-name">User</div></div>
+        <div class="story"><div class="story-pic"></div><div class="story-name">User</div></div>
+        <div class="story"><div class="story-pic"></div><div class="story-name">User</div></div>
+        <div class="story"><div class="story-pic"></div><div class="story-name">User</div></div>
+      </div>
+      <h2 class="explore-title">Explore Beatbuzz Profiles</h2>
+      <div class="profile-cards">
+        <!-- JS will populate profiles dynamically -->
+      </div>
+    </main>
+
+    <aside class="profile-panel">
+      <!-- Mini user card (kept for compatibility with existing JS) -->
+      <div class="my-card">
+        <img src="/uploads/default.jpg" alt="Your Profile Picture" class="your-pic" />
+        <div class="my-card-info">
+          <div class="your-name">Your Name</div>
+          <div class="your-zodiac">♒ Aquarius</div>
+        </div>
+        <div class="your-bio">About me: Enthusiast, writer. I make my vibe visible wherever I go.</div>
+      </div>
+
+      <!-- Theme controls -->
+      <div class="theme-controls">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <label class="form-check-label me-2" for="darkModeToggle">Dark mode</label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="darkModeToggle" />
+          </div>
+        </div>
+        <div class="accent-picker" aria-label="Accent color picker">
+          <button class="accent-swatch" data-color="#e41955" style="--swatch:#e41955" title="Pink"></button>
+          <button class="accent-swatch" data-color="#3b82f6" style="--swatch:#3b82f6" title="Blue"></button>
+          <button class="accent-swatch" data-color="#22c55e" style="--swatch:#22c55e" title="Green"></button>
+          <button class="accent-swatch" data-color="#f59e0b" style="--swatch:#f59e0b" title="Orange"></button>
+          <button class="accent-swatch" data-color="#8b5cf6" style="--swatch:#8b5cf6" title="Purple"></button>
+        </div>
+      </div>
+
+      <!-- Widgets -->
+      <section class="widget widget-follow">
+        <div class="widget-header">
+          <h6>People to follow</h6>
+          <a href="search.html" class="see-all">See all</a>
+        </div>
+        <div class="widget-body">
+          <!-- Skeleton rows -->
+          <div class="widget-row skeleton">
+            <div class="skeleton-circle"></div>
+            <div class="skeleton-line w-50"></div>
+            <div class="skeleton-pill"></div>
+          </div>
+          <div class="widget-row skeleton">
+            <div class="skeleton-circle"></div>
+            <div class="skeleton-line w-50"></div>
+            <div class="skeleton-pill"></div>
+          </div>
+          <div class="widget-row skeleton">
+            <div class="skeleton-circle"></div>
+            <div class="skeleton-line w-50"></div>
+            <div class="skeleton-pill"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="widget widget-saved">
+        <div class="widget-header">
+          <h6>You Saved</h6>
+          <a href="posts.html" class="see-all">See all</a>
+        </div>
+        <div class="saved-grid">
+          <!-- Skeleton thumbnails -->
+          <div class="thumb skeleton"></div>
+          <div class="thumb skeleton"></div>
+          <div class="thumb skeleton"></div>
+          <div class="thumb skeleton"></div>
+        </div>
+      </section>
+
+      <section class="widget widget-activity">
+        <div class="widget-header">
+          <h6>Recent Activity</h6>
+          <a href="notification.html" class="see-all">See all</a>
+        </div>
+        <ul class="activity-list">
+          <li class="skeleton"><div class="skeleton-line w-75"></div></li>
+          <li class="skeleton"><div class="skeleton-line w-75"></div></li>
+          <li class="skeleton"><div class="skeleton-line w-75"></div></li>
+          <li class="skeleton"><div class="skeleton-line w-75"></div></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <input type="file" id="storyUploadInput" accept="image/*" style="display: none;">
+
+  <div id="storyUploadModal" class="image-modal" style="display: none; z-index: 2000;">
+    <div style="background: #1a1a1a; border-radius: 16px; width: 90%; max-width: 400px; margin: 80px auto; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
+      <span id="closeStoryUpload" style="position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #aaa; transition: 0.2s;">&times;</span>
+      <h5 style="margin: 0; font-weight: 600; text-align: center;">New Story</h5>
+      <img id="storyPreviewImg" src="" style="width: 100%; max-height: 400px; object-fit: contain; background: #000; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+      <input type="text" id="storyCaptionInput" placeholder="Add a caption..." autocomplete="off" style="padding: 12px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); outline: none; background: rgba(0,0,0,0.5); color: white;">
+      <button id="postStoryBtn" style="padding: 12px; border-radius: 20px; background: #3b82f6; color: white; border: none; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s;">Post Story</button>
+    </div>
+  </div>
+
+  <div id="storyViewerModal" class="image-modal" style="display: none;">
+    <div class="image-modal-content" style="background: #111; height: 100vh; width: 100%; max-width: none; padding: 0;">
+      <div style="position: absolute; top: 20px; left: 20px; color: white; display: flex; align-items: center; gap: 10px; z-index: 1002;">
+        <img id="sv-profile-pic" src="" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <strong id="sv-username" style="font-size: 1.1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></strong>
+      </div>
+      
+      <button id="sv-delete-btn" style="display: none; position: absolute; top: 20px; right: 70px; z-index: 1004; background: rgba(220,53,69,0.8); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; backdrop-filter: blur(5px); font-size: 1.2rem; display: flex; align-items: center; justify-content: center;">
+        <i class="bi bi-trash"></i>
+      </button>
+
+      <span class="image-modal-close" id="closeStoryViewer" style="z-index: 1002;">&times;</span>
+      
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,0.3); z-index: 1002;">
+        <div id="sv-progress" style="height: 100%; width: 0%; background: white; transition: width 0.1s linear;"></div>
+      </div>
+
+<div id="sv-nav-prev" style="position: absolute; top: 50%; left: 15px; transform: translateY(-50%); color: white; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1005; font-size: 1.5rem; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s;">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div id="sv-nav-next" style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); color: white; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1005; font-size: 1.5rem; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s;">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+
+      <img id="sv-image" style="width: 100%; height: 100%; object-fit: contain; cursor: pointer;">
+      
+      <div id="sv-caption" style="position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; color: white; font-size: 1.1rem; font-weight: 500; text-shadow: 0 2px 8px rgba(0,0,0,0.9); z-index: 1003; pointer-events: none;"></div>
+
+      <div id="sv-owner-actions" style="display: none; position: absolute; bottom: 20px; right: 20px; z-index: 1004; gap: 10px;">
+        <button id="toggleRepliesBtn" style="background: rgba(0,0,0,0.6); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 8px 16px; backdrop-filter: blur(5px); cursor: pointer; transition: background 0.3s;">
+          <i class="bi bi-chat-dots"></i> <span id="sv-btn-replies-count">0</span> Replies
+        </button>
+        <button id="toggleViewersBtn" style="background: rgba(0,0,0,0.6); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 8px 16px; backdrop-filter: blur(5px); cursor: pointer; transition: background 0.3s;">
+          <i class="bi bi-eye"></i> <span id="sv-btn-count">0</span> Views
+        </button>
+      </div>
+
+      <div id="sv-viewers-panel" style="display: none; position: absolute; bottom: 70px; right: 20px; width: 300px; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px); border-radius: 12px; padding: 15px; color: white; z-index: 1003; max-height: 40vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+        <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px;">Viewers</div>
+        <div id="sv-viewers-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+      </div>
+
+      <div id="sv-replies-panel" style="display: none; position: absolute; bottom: 70px; right: 20px; width: 300px; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px); border-radius: 12px; padding: 15px; color: white; z-index: 1003; max-height: 40vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+        <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px;">Replies</div>
+        <div id="sv-replies-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+      </div>
+
+      <div id="sv-interaction-bar" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; gap: 10px; z-index: 1004;">
+        <input type="text" id="sv-comment-input" placeholder="Reply to story..." autocomplete="off" style="flex: 1; border-radius: 30px; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); color: white; outline: none; backdrop-filter: blur(5px);">
+        <button id="sv-like-btn" style="background: transparent; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0 10px;">
+          <i class="bi bi-heart"></i>
+        </button>
+      </div>
+
+    </div> 
+  </div> 
+  
+  <script src="../theme.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="explore.js"></script>
+</body>
+</html>

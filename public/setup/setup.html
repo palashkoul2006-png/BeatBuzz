@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BeatBuzz | Setup Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="../Beatbuzz_icon.png">
+
+</head>
+<body>
+
+<div class="card">
+  <div class="left">
+    <!-- Brand header -->
+    <div class="brand-header">
+      <img src="../Beatbuzz_icon.png" alt="BeatBuzz" class="brand-icon" />
+      <span class="brand-name">BeatBuzz</span>
+    </div>
+    <h1 class="title">User Profile Form</h1>
+    <form class="form" action="http://localhost:5000/submit_profile" method="POST" enctype="multipart/form-data">
+      <input class="input" type="email" name="email" placeholder="VIT Email*" required />
+      <input class="input" type="text" name="full_name" placeholder="Full Name*" required />
+      <input class="input" type="text" name="branch" placeholder="Branch*" required />
+      <input class="input" type="text" name="clubs_part_of" placeholder="Clubs Part Of" />
+      <input class="input" type="text" name="domain" placeholder="Domain" />
+      <input class="input" type="text" name="position" placeholder="Position" />
+      <input class="input" type="number" name="year" placeholder="Year*" required min="1" />
+      <input class="input" type="text" name="hometown" placeholder="Hometown*" required />
+      <textarea class="input" name="bio" placeholder="Bio - write in small words (aura form by writing attractive bio)*" required rows="4" style="resize:none;"></textarea>
+      <label for="zodiac_sign">Zodiac Sign*</label>
+      <select class="input" name="zodiac_sign" id="zodiac_sign" required>
+        <option value="" disabled selected>Select your zodiac sign</option>
+        <option value="Aries">Aries</option>
+        <option value="Taurus">Taurus</option>
+        <option value="Gemini">Gemini</option>
+        <option value="Cancer">Cancer</option>
+        <option value="Leo">Leo</option>
+        <option value="Virgo">Virgo</option>
+        <option value="Libra">Libra</option>
+        <option value="Scorpio">Scorpio</option>
+        <option value="Sagittarius">Sagittarius</option>
+        <option value="Capricorn">Capricorn</option>
+        <option value="Aquarius">Aquarius</option>
+        <option value="Pisces">Pisces</option>
+      </select>
+      <label for="profile_pic">Profile Pic (choose photo):</label>
+      <input class="input" type="file" name="profile_pic" id="profile_pic" accept="image/*" />
+      <img id="profile_pic_preview" src="" alt="Profile Picture Preview" style="display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 2px solid #5b21b6; margin-left: auto; margin-right: auto;" />
+      <button class="btn" type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="right">
+    <h2>Welcome</h2>
+    <p>Fill your profile details here.</p>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+<!-- <script src="/script.js"></script> -->
+<script>
+  const profilePicInput = document.getElementById('profile_pic');
+  const profilePicPreview = document.getElementById('profile_pic_preview');
+
+  if (profilePicInput && profilePicPreview) {
+    profilePicInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        if (file.name.toLowerCase().endsWith('.heic') || file.type === 'image/heic') {
+          if (typeof heic2any !== 'undefined') {
+            heic2any({ blob: file, toType: 'image/jpeg' })
+              .then(conversionResult => {
+                const blob = Array.isArray(conversionResult) ? conversionResult[0] : conversionResult;
+                
+                // Replace the file in the input with the converted JPEG
+                const convertedFile = new File([blob], file.name.replace(/\.heic$/i, '.jpg'), { type: 'image/jpeg' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(convertedFile);
+                profilePicInput.files = dataTransfer.files;
+
+                profilePicPreview.src = URL.createObjectURL(blob);
+                profilePicPreview.style.display = 'block';
+              })
+              .catch(err => {
+                console.error('HEIC conversion error:', err);
+                profilePicPreview.alt = 'Preview not supported for this HEIC file.';
+                profilePicPreview.style.display = 'block';
+              });
+          } else {
+            profilePicPreview.alt = 'HEIC preview not supported.';
+            profilePicPreview.style.display = 'block';
+          }
+        } else {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            profilePicPreview.src = e.target.result;
+            profilePicPreview.style.display = 'block';
+          }
+          reader.readAsDataURL(file);
+        }
+      } else {
+        profilePicPreview.src = '';
+        profilePicPreview.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>

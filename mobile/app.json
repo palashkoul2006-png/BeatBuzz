@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "BeatBuzz",
+    "slug": "beatbuzz-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.beatbuzz.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "usesCleartextTraffic": true
+    },
+    "plugins": [
+      "expo-image-picker",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ],
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#121212"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e7bd57f9-24f7-45d4-9e9e-5f59435720a8"
+      }
+    }
+  }
+}

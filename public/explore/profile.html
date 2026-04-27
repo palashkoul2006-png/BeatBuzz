@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Beatbuzz | Profile</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="explore.css"/>
+  <link rel="stylesheet" href="profile.css"/>
+    <link rel="icon" type="image/png" href="Beatbuzz_icon.png">
+
+</head>
+<body class="page-enter">
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <a href="explore.html"><i class="bi bi-compass"></i><span class="label">Explore</span></a>
+      <a href="search.html"><i class="bi bi-search"></i><span class="label">Search</span></a>
+      <a href="notification.html"><i class="bi bi-bell"></i><span class="label">Notifications</span></a>
+      <a href="posts.html"><i class="bi bi-images"></i><span class="label">Posts</span></a>
+      <a href="chat.html"><i class="bi bi-chat-dots"></i><span class="label">Chat</span></a>
+      <a href="profile.html" class="active"><i class="bi bi-person"></i><span class="label">Profile</span></a>
+      <a href="http://localhost:5000/logout"><i class="bi bi-box-arrow-right"></i><span class="label">Logout</span></a>
+    </nav>
+
+    <!-- Center: User Profile -->
+    <main class="center-feed">
+      <div class="user-profile-card">
+        <div class="top-section">
+          <div class="profile-pic-wrapper">
+  <img id="profilePic" class="profile-pic" src="/uploads/default.jpg" alt="Profile Picture">
+</div>
+          <div class="profile-info">
+            <div class="profile-username">@loading</div>
+            <div class="profile-fullname">Loading...</div>
+            <div class="profile-zodiac">♒</div>
+            <div class="profile-bio">Loading bio...</div>
+            <div class="vibe-info">
+  <span class="vibe-count">0 Vibes</span>
+</div>
+
+            <button class="edit-btn" style="display:none; margin-top:8px;">Edit Profile</button>
+
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about-section">
+          <h3>About <span class="profile-username-about">@loading</span></h3>
+          <p><strong>Hometown:</strong> <span class="profile-hometown">Loading...</span></p>
+          <p><strong>Year:</strong> <span class="profile-year">Loading...</span></p>
+          <p><strong>Branch:</strong> <span class="profile-branch">Loading...</span></p>
+          <p><strong>Domain:</strong> <span class="profile-domain">Loading...</span></p>
+          <p><strong>Clubs:</strong> <span class="profile-clubs">Loading...</span></p>
+          <p><strong>Position:</strong> <span class="profile-position">Loading...</span></p>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+          <h3>Contact</h3>
+          <p class="profile-email">Loading...</p>
+        </div>
+
+        <div class="edit-panel" style="display:none; margin-top:16px;">
+          <h3>Edit Profile</h3>
+          <div class="edit-row">
+            <label for="edit-field">Field</label>
+            <select id="edit-field">
+              <option value="full_name">Full Name</option>
+              <option value="bio">Bio</option>
+              <option value="zodiac_sign">Zodiac Sign</option>
+              <option value="hometown">Hometown</option>
+              <option value="year">Year</option>
+              <option value="branch">Branch</option>
+              <option value="clubs_part_of">Clubs</option>
+              <option value="domain">Domain</option>
+              <option value="position">Position</option>
+            </select>
+          </div>
+          <div class="edit-row">
+            <label for="edit-value">Value</label>
+            <input id="edit-value" type="text" placeholder="Enter new value"/>
+            <button id="save-field" class="view-btn" style="margin-left:8px;">Update</button>
+          </div>
+
+          <div class="edit-row" style="margin-top:12px;">
+            <label for="edit-pic">Profile Picture</label>
+            <input id="edit-pic" type="file" accept="image/*"/>
+            <button id="save-pic" class="view-btn" style="margin-left:8px;">Upload</button>
+          </div>
+          <div class="edit-row" style="margin-top:8px;">
+            <img id="edit-pic-preview" src="" alt="Profile Picture Preview" style="display: none; width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #5b21b6;" />
+          </div>
+
+          <p class="edit-status" style="margin-top:8px; color:#666;"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right: Blank for now -->
+    <aside class="profile-panel">
+      <!-- Empty for now -->
+    </aside>
+  </div>
+
+  <div id="imageModal" class="modal">
+  <img id="modalImg" onclick="event.stopPropagation()" style="max-width: 90%; max-height: 90%; border-radius: 12px; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+</div>
+  
+  <script src="../theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

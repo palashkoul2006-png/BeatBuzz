@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Beatbuzz | Notifications</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="explore.css"/>
+  <link rel="stylesheet" href="notification.css"/>
+  <link rel="icon" type="image/png" href="Beatbuzz_icon.png">
+</head>
+<body class="page-enter">
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <a href="explore.html"><i class="bi bi-compass"></i><span class="label">Explore</span></a>
+      <a href="search.html"><i class="bi bi-search"></i><span class="label">Search</span></a>
+      <a href="notification.html" class="active"><i class="bi bi-bell"></i><span class="label">Notifications</span></a>
+      <a href="posts.html"><i class="bi bi-images"></i><span class="label">Posts</span></a>
+      <a href="chat.html"><i class="bi bi-chat-dots"></i><span class="label">Chat</span></a>
+      <a href="profile.html"><i class="bi bi-person"></i><span class="label">Profile</span></a>
+      <a href="http://localhost:5000/logout"><i class="bi bi-box-arrow-right"></i><span class="label">Logout</span></a>
+    </nav>
+
+    <!-- Center content -->
+    <main class="center-feed">
+      <h2 class="notification-title">Your Notifications</h2>
+      <div id="notification-list" class="notification-list">
+        <!-- Notifications will be injected here -->
+      </div>
+    </main>
+
+    <!-- Right profile panel -->
+    <aside class="profile-panel">
+      <img src="/uploads/default.jpg" 
+           alt="Your Profile Picture" 
+           class="your-pic" 
+           style="border-radius:50%; width:90px; height:90px; border: 2px solid #5b21b6; margin-bottom:1rem;" />
+      <div class="your-name">Your Name</div>
+      <div class="your-zodiac">♒ Aquarius</div>
+      <div class="your-bio">About me: Enthusiast, writer. I make my vibe visible wherever I go.</div>
+    </aside>
+  </div>
+
+  <script src="../theme.js"></script>
+  <script src="notification.js"></script>
+</body>
+</html>
